@@ -11,7 +11,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ProcessMonitor.ViewModels
 {
@@ -23,19 +22,20 @@ namespace ProcessMonitor.ViewModels
             get { return _processList; }
             set { SetProperty(ref _processList, value); }
         }
+
         private ObservableCollection<ProcessInListDisplay> _filteredProcessList = new ObservableCollection<ProcessInListDisplay>();
         public ObservableCollection<ProcessInListDisplay> FilteredProcessList
         {
             get { return _filteredProcessList; }
-            set { SetProperty(ref _filteredProcessList, value);}
+            set { SetProperty(ref _filteredProcessList, value); }
         }
 
         private string _filterPhrase = "";
         public string FilterPhrase
         {
             get { return _filterPhrase; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _filterPhrase, value);
                 ApplyFilters();
             }
@@ -56,7 +56,7 @@ namespace ProcessMonitor.ViewModels
         public int PercentOfProcessFinished
         {
             get { return _percentOfProcessFinished; }
-            set{ SetProperty(ref _percentOfProcessFinished, value); }
+            set { SetProperty(ref _percentOfProcessFinished, value); }
         }
 
         public DelegateCommand RefreshProcessListCommand { get; set; }
@@ -106,8 +106,8 @@ namespace ProcessMonitor.ViewModels
         {
             FilteredProcessList.Clear();
             List<ProcessInListDisplay> MatchingProcesses =
-                ProcessList.Where(process => 
-                process.DisplayName.ToLower().Contains(FilterPhrase.ToLower()) || 
+                ProcessList.Where(process =>
+                process.DisplayName.ToLower().Contains(FilterPhrase.ToLower()) ||
                 process.Pid.Contains(FilterPhrase))
                 .ToList();
             FilteredProcessList.AddRange(MatchingProcesses);
@@ -135,19 +135,22 @@ namespace ProcessMonitor.ViewModels
         {
             return ProcessFetcher.FetchByPid(pid) != null;
         }
+
         private void TerminateProcess()
         {
-            if(SelectedProcess != null)
+            if (SelectedProcess != null)
             {
                 ProcessManager.KillProcess(SelectedProcess.Pid);
                 ProcessList.Remove(SelectedProcess);
                 ApplyFilters();
             }
         }
+
         private ProcessInListDisplay MapProcessForDisplay(Process process)
         {
             return new ProcessInListDisplay { Name = process.ProcessName, Pid = process.Id.ToString() };
         }
+
         private void RaiseProcessSelectedEvent(ProcessInListDisplay value)
         {
             if (value != null)
@@ -162,6 +165,7 @@ namespace ProcessMonitor.ViewModels
             ProcessList.AddRange(newItems);
             ApplyFilters();
         }
+
         public void SortAscending()
         {
             List<ProcessInListDisplay> sorted = ProcessList.OrderBy(obj => obj.Name).ToList();

@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProcessMonitor.Model.Logic
+﻿namespace ProcessMonitor.Model.Logic
 {
     public class TwoDirPresenterSorter
     {
-        enum SortDirection{
+        enum SortDirection
+        {
             ASC, DESC, DEFAULT
         }
+
         private SortDirection CurrentDirection;
-        private ISortsTwoWay SortingSubject;
+        private readonly ISortsTwoWay SortingSubject;
+
         public TwoDirPresenterSorter(ISortsTwoWay sortingItem)
         {
             SortingSubject = sortingItem;
             CurrentDirection = SortDirection.DEFAULT;
         }
+
         public void SortNext()
         {
             switch (CurrentDirection)
@@ -26,6 +24,7 @@ namespace ProcessMonitor.Model.Logic
                     SortingSubject.SortAscending();
                     CurrentDirection = SortDirection.ASC;
                     break;
+
                 case SortDirection.ASC:
                     SortingSubject.SortDescending();
                     CurrentDirection = SortDirection.DESC;
@@ -37,6 +36,7 @@ namespace ProcessMonitor.Model.Logic
                     break;
             }
         }
+
         public void SortCurrent()
         {
             switch (CurrentDirection)
@@ -44,6 +44,7 @@ namespace ProcessMonitor.Model.Logic
                 case SortDirection.DEFAULT:
                     SortingSubject.SortDefault();
                     break;
+
                 case SortDirection.ASC:
                     SortingSubject.SortAscending();
                     break;
@@ -53,6 +54,5 @@ namespace ProcessMonitor.Model.Logic
                     break;
             }
         }
-
     }
 }

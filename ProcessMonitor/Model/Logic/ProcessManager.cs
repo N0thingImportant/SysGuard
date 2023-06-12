@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace ProcessMonitor.Model.Logic
 {
@@ -12,14 +7,13 @@ namespace ProcessMonitor.Model.Logic
         public static Process StartProcess(int msDuration)
         {
             Process newProcess = Process.Start("notepad.exe");
-            
             return newProcess;
         }
 
         public static void KillProcess(string pid)
         {
             Process matchingProcess = ProcessFetcher.FetchByPid(pid);
-            if(matchingProcess != null)
+            if (matchingProcess != null)
             {
                 matchingProcess.Kill();
             }
@@ -28,11 +22,10 @@ namespace ProcessMonitor.Model.Logic
         public static void SetPriority(string pid, ProcessPriorityClass priorityClass)
         {
             Process matchingProcess = ProcessFetcher.FetchByPid(pid);
-            if(matchingProcess != null)
+            if (matchingProcess != null)
             {
                 matchingProcess.PriorityClass = priorityClass;
             }
-            
         }
     }
 }

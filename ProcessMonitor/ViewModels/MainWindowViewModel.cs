@@ -11,7 +11,9 @@ namespace ProcessMonitor.ViewModels
     {
         public DelegateCommand CloseCommand { get; set; }
         public DelegateCommand MinimizeCommand { get; set; }
+
         private IEventAggregator _eventAggregator;
+
         public MainWindowViewModel(IEventAggregator eventAggregator)
         {
             CloseCommand = new DelegateCommand(CloseWindow);
@@ -19,6 +21,7 @@ namespace ProcessMonitor.ViewModels
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<ThreadMadeEvent>().Subscribe(AddToManagedThreads);
         }
+
         private void CloseWindow()
         {
             AppThreadManager.TerminateEvery();
@@ -29,6 +32,7 @@ namespace ProcessMonitor.ViewModels
         {
 
         }
+
         private void AddToManagedThreads(Thread t)
         {
             AppThreadManager.AddThread(t);

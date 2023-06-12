@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProcessMonitor.Model.Logic
+﻿namespace ProcessMonitor.Model.Logic
 {
     public interface IUpdatesProgress
     {

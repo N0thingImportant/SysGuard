@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProcessMonitor.Model.Presentation
 {
@@ -17,12 +13,14 @@ namespace ProcessMonitor.Model.Presentation
     {
         public static List<ProcessPriorityInComboBox> Generate()
         {
-            List<ProcessPriorityInComboBox> prioritaits = new List<ProcessPriorityInComboBox>();
-            prioritaits.Add(new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.Idle, PriorityName = "Idle" });
-            prioritaits.Add(new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.BelowNormal, PriorityName = "Below normal" });
-            prioritaits.Add(new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.Normal, PriorityName = "Normal" });
-            prioritaits.Add(new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.AboveNormal, PriorityName = "Above normal" });
-            prioritaits.Add(new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.RealTime, PriorityName = "Real time" });
+            List<ProcessPriorityInComboBox> prioritaits = new List<ProcessPriorityInComboBox>
+            {
+                new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.Idle, PriorityName = "Idle" },
+                new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.BelowNormal, PriorityName = "Below normal" },
+                new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.Normal, PriorityName = "Normal" },
+                new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.AboveNormal, PriorityName = "Above normal" },
+                new ProcessPriorityInComboBox { Priority = ProcessPriorityClass.RealTime, PriorityName = "Real time" }
+            };
             return prioritaits;
         }
     }

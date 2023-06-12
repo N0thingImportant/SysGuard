@@ -1,9 +1,4 @@
-﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ProcessMonitor.Model.Presentation
 {
@@ -19,6 +14,7 @@ namespace ProcessMonitor.Model.Presentation
             ModulesCount = "-";
             Responding = "-";
         }
+
         public string Name { get; set; }
         public string Pid { get; set; }
         public string Memory { get; set; }

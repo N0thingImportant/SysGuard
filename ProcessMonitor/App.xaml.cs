@@ -1,5 +1,5 @@
-﻿using ProcessMonitor.Views;
-using Prism.Ioc;
+﻿using Prism.Ioc;
+using ProcessMonitor.Views;
 using System.Windows;
 
 namespace ProcessMonitor

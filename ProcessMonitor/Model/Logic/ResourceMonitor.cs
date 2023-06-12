@@ -1,18 +1,14 @@
 ﻿using ProcessMonitor.Model.Presentation;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProcessMonitor.Model.Logic
 {
     public class ResourceMonitor
     {
-        PerformanceCounter cpuCounter;
-        PerformanceCounter ramPercentCounter;
-        PerformanceCounter cacheHitsPercent;
+        private readonly PerformanceCounter cpuCounter;
+        private readonly PerformanceCounter ramPercentCounter;
+        private readonly PerformanceCounter cacheHitsPercent;
+
         public ResourceMonitor()
         {
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");

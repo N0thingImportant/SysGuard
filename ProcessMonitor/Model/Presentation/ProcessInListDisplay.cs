@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProcessMonitor.Model
+﻿namespace ProcessMonitor.Model
 {
     public class ProcessInListDisplay
     {
         public string Pid { get; set; }
         public string Name { get; set; }
 
-        public string DisplayName { 
+        public string DisplayName
+        {
             get
             {
-                return "[" + Pid + "]: " + Name;
+                return $"[{Pid,6}]: {Name}";
             }
         }
+
         public override bool Equals(object obj)
         {
-            if (obj.GetType().Equals(this.GetType()))
+            if (obj is ProcessInListDisplay process)
             {
-                return ((ProcessInListDisplay)obj).Pid == Pid;
+                return process.Pid == Pid;
             }
             return false;
         }

@@ -28,7 +28,7 @@ namespace ProcessMonitor.ViewModels
         private void LoadDetailsOfProcess(string pid)
         {
             Process selectedProcess = ProcessFetcher.FetchByPid(pid);
-            if(selectedProcess == null)
+            if (selectedProcess == null)
             {
                 return;
             }
@@ -44,7 +44,9 @@ namespace ProcessMonitor.ViewModels
             //while (moduleEnumerator.MoveNext())
             //    moduleNames.Add(((ProcessModule)moduleEnumerator.Current).ModuleName);
             while (threadEnumerator.MoveNext())
+            {
                 threadNames.Add(((ProcessThread)threadEnumerator.Current).Id.ToString());
+            }
 
             return new ProcessInDetailsDisplay
             {
@@ -59,6 +61,5 @@ namespace ProcessMonitor.ViewModels
                 ModuleNames = moduleNames
             };
         }
-
     }
 }

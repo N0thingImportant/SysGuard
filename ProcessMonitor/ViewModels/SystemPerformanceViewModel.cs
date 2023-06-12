@@ -1,12 +1,7 @@
 ﻿using Prism.Mvvm;
 using ProcessMonitor.Model.Logic;
 using ProcessMonitor.Model.Presentation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ProcessMonitor.ViewModels
 {
@@ -20,12 +15,13 @@ namespace ProcessMonitor.ViewModels
         }
 
         private ResourceMonitor resourceMonitor;
-       
+
         public SystemPerformanceViewModel()
         {
             resourceMonitor = new ResourceMonitor();
             StartSystemStatsThread();
         }
+
         private void StartSystemStatsThread()
         {
             Thread statsCheckThread = new Thread(StartUpdatingSystemStats);
@@ -40,7 +36,6 @@ namespace ProcessMonitor.ViewModels
                 Usage = resourceMonitor.GetResourcesUsage();
                 Thread.Sleep(500);
             }
-
         }
     }
 }
