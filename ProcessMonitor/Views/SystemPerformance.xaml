@@ -7,10 +7,11 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:local="clr-namespace:ProcessMonitor.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="160" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="DetailsValueBox" TargetType="TextBox">
             <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -29,7 +30,7 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Height" Value="28"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontSize" Value="13"/>
         </Style>
     </UserControl.Resources>
@@ -47,32 +48,31 @@
             <Label Content="System resources" Foreground="GhostWhite"></Label>
         </StackPanel>
 
-
         <Border Margin="5" Background="#424242" Grid.Row="1" Grid.Column="0" CornerRadius="5">
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label  Content="CPU Usage[%]" Grid.Row="0" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.CpuUsage}"></TextBox>
+                <Label  Content="CPU Usage" Grid.Row="0" Grid.Column="1" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.CpuUsage}"></TextBox>
 
-                <Label  Content="RAM Avail.[MB]" Grid.Row="0" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.MemoryUsage}"></TextBox>
+                <Label  Content="RAM Avalible" Grid.Row="0" Grid.Column="3" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.MemoryUsage}"></TextBox>
 
-                <Label  Content="Cache Hits[%]" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.CacheHits}"></TextBox>
+                <Label  Content="Cache Hits" Grid.Row="0" Grid.Column="5" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="1" Grid.Column="5" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.CacheHits}"></TextBox>
 
             </Grid>
         </Border>

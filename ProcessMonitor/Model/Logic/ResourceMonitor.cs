@@ -20,9 +20,9 @@ namespace ProcessMonitor.Model.Logic
         {
             return new ResourcesUsage
             {
-                CpuUsage = cpuCounter.NextValue().ToString(),
-                MemoryUsage = ramPercentCounter.NextValue().ToString(),
-                CacheHits = cacheHitsPercent.NextValue().ToString()
+                CpuUsage = (cpuCounter.NextValue()/100).ToString("P2"),
+                MemoryUsage = ramPercentCounter.NextValue().ToString("0.00 Mb"),
+                CacheHits = (cacheHitsPercent.NextValue()/100).ToString("P2")
             };
         }
     }
