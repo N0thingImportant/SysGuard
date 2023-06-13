@@ -37,7 +37,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -61,18 +61,18 @@
                 </Grid.ColumnDefinitions>
                 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Label  Content="CPU Usage" Grid.Row="0" Grid.Column="1" Style="{StaticResource DetailsValueLabel}"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.CpuUsage}"></TextBox>
 
-                <Label  Content="RAM Avalible" Grid.Row="0" Grid.Column="3" Style="{StaticResource DetailsValueLabel}"/>
+                <Label  Content="RAM Usage" Grid.Row="0" Grid.Column="3" Style="{StaticResource DetailsValueLabel}"/>
                 <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.MemoryUsage}"></TextBox>
 
-                <Label  Content="Cache Hits" Grid.Row="0" Grid.Column="5" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="1" Grid.Column="5" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.CacheHits}"></TextBox>
+                <Label  Content="RAM Avalible" Grid.Row="0" Grid.Column="5" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="1" Grid.Column="5" Style="{StaticResource DetailsValueBox}" Text="{Binding Usage.MemoryAvail}"></TextBox>
 
             </Grid>
         </Border>

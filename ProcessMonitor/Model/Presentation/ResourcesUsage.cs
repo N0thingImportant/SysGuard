@@ -4,6 +4,6 @@
     {
         public string CpuUsage { get; set; }
         public string MemoryUsage { get; set; }
-        public string CacheHits { get; set; }
+        public string MemoryAvail { get; set; }
     }
 }
