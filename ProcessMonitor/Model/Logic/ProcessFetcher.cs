@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using ProcessMonitor.ProcessThings;
+using System.Collections.Generic;
 
 namespace ProcessMonitor.Model
 {
     public static class ProcessFetcher
     {
-        public static List<Process> Fetch()
+        public static List<ProcessInfo> Fetch()
         {
-            return new List<Process>(Process.GetProcesses());
+            return new List<ProcessInfo>(ProcessInfo.GetProcesses());
         }
 
-        public static Process FetchByPid(string pid)
+        public static ProcessInfo FetchByPid(string pid)
         {
             try
             {
-                Process fetchedProcess = Process.GetProcessById(int.Parse(pid));
+                ProcessInfo fetchedProcess = ProcessInfo.GetProcessById(pid);
                 return fetchedProcess;
             }
             catch

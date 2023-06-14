@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using ProcessMonitor.Model;
 using ProcessMonitor.Model.Events;
 using ProcessMonitor.Model.Logic;
+using ProcessMonitor.ProcessThings;
 using ProcessMonitor.Views;
 using System;
 using System.Collections.Generic;
@@ -146,9 +147,9 @@ namespace ProcessMonitor.ViewModels
             }
         }
 
-        private ProcessInListDisplay MapProcessForDisplay(Process process)
+        private ProcessInListDisplay MapProcessForDisplay(ProcessInfo process)
         {
-            return new ProcessInListDisplay { Name = process.ProcessName, Pid = process.Id.ToString() };
+            return new ProcessInListDisplay { Name = process.Name, Pid = process.PID.ToString() };
         }
 
         private void RaiseProcessSelectedEvent(ProcessInListDisplay value)

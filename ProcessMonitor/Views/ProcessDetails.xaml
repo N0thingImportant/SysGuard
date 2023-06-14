@@ -6,11 +6,14 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:local="clr-namespace:ProcessMonitor.Views"
+             xmlns:viewmodels="clr-namespace:ProcessMonitor.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ProcessDetailsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="DetailsValueBox" TargetType="TextBox">
             <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -109,19 +112,26 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label  Content="Full Name" Grid.Row="0" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Name}"></TextBox>
+                <Label  Content="Full path" Grid.Row="0" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Path}"></TextBox>
 
-                <Label Content="PID" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"></Label>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Pid}"></TextBox>
+                <Label  Content="CommandLine" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Args}"></TextBox>
 
-                <Label Content="Threads" Grid.Row="2" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"></Label>
-                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.ThreadsCount}"></TextBox>
+                <Label  Content="Name" Grid.Row="2" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Name}"></TextBox>
 
+                <Label Content="PID" Grid.Row="3" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"></Label>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Pid}"></TextBox>
 
-                <ScrollViewer Background="#3d3d3d" Grid.Row="3" Grid.Column="0" BorderBrush="Gray" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="10">
+                <Label Content="Threads" Grid.Row="4" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"></Label>
+                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.ThreadsCount}"></TextBox>
+
+                <ScrollViewer Background="#3d3d3d" Grid.Row="5" Grid.Column="0" BorderBrush="Gray" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="10">
                     <ListBox Background="#3d3d3d" BorderThickness="0" Grid.Row="1" Grid.Column="0"
                          BorderBrush="Gray" ItemsSource="{Binding DisplayedProcess.ThreadNames}">
                         <ListBox.Template>
@@ -129,34 +139,32 @@
                                 <ItemsPresenter/>
                             </ControlTemplate>
                         </ListBox.Template>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
 
-                                    <Border CornerRadius="5">
-                                        <Label Content="{Binding }" Foreground="GhostWhite">
-                                        </Label>
-                                    </Border>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
+                                <Border CornerRadius="5">
+                                    <Label Content="{Binding }" Foreground="GhostWhite">
+                                    </Label>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
 
-                            <ListBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </ListBox.Resources>
-                        </ListBox>
+                        <ListBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </ListBox.Resources>
+                    </ListBox>
                 </ScrollViewer>
 
+                <Label  Content="Memory used" Grid.Row="2" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Memory}"></TextBox>
 
+                <Label  Content="Priority" Grid.Row="3" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource DetailsValueBox}" IsReadOnly="False"  Text="{Binding DisplayedProcess.Priority}"></TextBox>
 
-                <Label  Content="Memory used" Grid.Row="0" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.Memory}"></TextBox>
-
-                <Label  Content="Priority" Grid.Row="1" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource DetailsValueBox}" IsReadOnly="False"  Text="{Binding DisplayedProcess.Priority}"></TextBox>
-
-                <Label  Content="Modules" Grid.Row="2" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.ModulesCount}"></TextBox>
+                <Label  Content="Modules" Grid.Row="4" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
+                <TextBox Grid.Row="4" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.ModulesCount}"></TextBox>
 
             </Grid>
         </Border>

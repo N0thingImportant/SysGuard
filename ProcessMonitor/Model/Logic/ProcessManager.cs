@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using ProcessMonitor.ProcessThings;
+using System.Diagnostics;
 
 namespace ProcessMonitor.Model.Logic
 {
@@ -12,7 +13,7 @@ namespace ProcessMonitor.Model.Logic
 
         public static void KillProcess(string pid)
         {
-            Process matchingProcess = ProcessFetcher.FetchByPid(pid);
+            ProcessInfo matchingProcess = ProcessFetcher.FetchByPid(pid);
             if (matchingProcess != null)
             {
                 matchingProcess.Kill();
@@ -21,10 +22,10 @@ namespace ProcessMonitor.Model.Logic
 
         public static void SetPriority(string pid, ProcessPriorityClass priorityClass)
         {
-            Process matchingProcess = ProcessFetcher.FetchByPid(pid);
+            ProcessInfo matchingProcess = ProcessFetcher.FetchByPid(pid);
             if (matchingProcess != null)
             {
-                matchingProcess.PriorityClass = priorityClass;
+                matchingProcess.SetPriority(priorityClass);
             }
         }
     }

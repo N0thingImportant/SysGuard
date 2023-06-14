@@ -6,9 +6,9 @@ namespace ProcessMonitor.Model.Presentation
     {
         public ProcessInDetailsDisplay()
         {
-            Name = "-";
+            Name = "NAME";
             Pid = "-";
-            Memory = "-";
+            Memory = "MEMORY";
             Priority = "-";
             ThreadsCount = "-";
             ModulesCount = "-";
@@ -16,6 +16,8 @@ namespace ProcessMonitor.Model.Presentation
         }
 
         public string Name { get; set; }
+        public string Path { get; set; }
+        public string Args { get; set; }
         public string Pid { get; set; }
         public string Memory { get; set; }
         public string Priority { get; set; }
