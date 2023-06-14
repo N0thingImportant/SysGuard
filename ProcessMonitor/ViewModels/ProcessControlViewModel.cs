@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using ProcessMonitor.Model.Events;
 using ProcessMonitor.Model.Logic;
 using ProcessMonitor.Model.Presentation;
+using ProcessMonitor.ProcessThings;
 using System.Collections.Generic;
 
 namespace ProcessMonitor.ViewModels

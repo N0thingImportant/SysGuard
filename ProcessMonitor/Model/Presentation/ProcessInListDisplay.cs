@@ -1,4 +1,6 @@
-﻿namespace ProcessMonitor.Model
+﻿using ProcessMonitor.ProcessThings;
+
+namespace ProcessMonitor.Model
 {
     public class ProcessInListDisplay
     {
@@ -12,6 +14,13 @@
                 return $"[{Pid,6}]: {Name}";
             }
         }
+
+        public static ProcessInListDisplay Create(ProcessInfo process)
+        {
+            return new ProcessInListDisplay { Name = process.Name, Pid = process.PID.ToString() };
+        }
+
+        public override string ToString() => DisplayName;
 
         public override bool Equals(object obj)
         {

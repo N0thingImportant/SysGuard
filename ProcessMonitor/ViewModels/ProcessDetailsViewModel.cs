@@ -7,6 +7,7 @@ using ProcessMonitor.ProcessThings;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ProcessMonitor.ViewModels
 {
@@ -28,7 +29,7 @@ namespace ProcessMonitor.ViewModels
 
         private void LoadDetailsOfProcess(string pid)
         {
-            ProcessInfo selectedProcess = ProcessFetcher.FetchByPid(pid);
+            ProcessInfo selectedProcess = ProcessInfo.GetProcessById(pid);
             if (selectedProcess == null)
             {
                 return;
@@ -38,30 +39,23 @@ namespace ProcessMonitor.ViewModels
 
         private ProcessInDetailsDisplay MapProcessToDisplay(ProcessInfo process)
         {
-            List<string> threadNames = new List<string>();
+            List<string> childNames = new List<string>(process.GetChildProcesses().Select(ProcessInListDisplay.Create).Select(p =>p.ToString()));
             List<string> moduleNames = new List<string>();
-            ////IEnumerator moduleEnumerator = process.Modules.GetEnumerator();
-            //IEnumerator threadEnumerator = process.Threads.GetEnumerator();
-            ////while (moduleEnumerator.MoveNext())
-            ////    moduleNames.Add(((ProcessModule)moduleEnumerator.Current).ModuleName);
-            //while (threadEnumerator.MoveNext())
-            //{
-            //    threadNames.Add(((ProcessThread)threadEnumerator.Current).Id.ToString());
-            //}
 
             return new ProcessInDetailsDisplay
             {
                 Name = process.Name,
-                //Memory = process.NonpagedSystemMemorySize64.ToString(),
+                WorkingSet = (process.WorkingSetSize / 1024.0 / 1024.0).ToString("#,0.0 Mb"),
+                Pid = process.PID.ToString(),
+                ParentPid = process.ParentPID.ToString(),
+                CreationDate = process.CreationDate.ToString(),
+                Priority = process.Priority.ToString(),
+                CommandLine = process.CommandLine,
+                ExecutablePath = process.ExecutablePath,
                 ThreadsCount = process.ThreadCount.ToString(),
                 ModulesCount = process.HandleCount.ToString(),
-                Pid = process.PID.ToString(),
-                Priority = process.Priority.ToString(),
-                //Responding = process.Responding.ToString(),
-                Args = process.CommandLine,
-                Path = process.ExecutablePath,
-                ThreadNames = threadNames,
-                ModuleNames = moduleNames
+                ThreadNames = childNames,
+                ModuleNames = moduleNames,
             };
         }
     }

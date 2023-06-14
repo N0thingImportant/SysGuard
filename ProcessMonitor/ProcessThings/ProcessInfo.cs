@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Management;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProcessMonitor.ProcessThings
 {
-    public class ProcessInfo
+    public class ProcessInfo : IDisposable
     {
         private ManagementObject _process;
 
@@ -29,26 +28,53 @@ namespace ProcessMonitor.ProcessThings
         public string ExecutablePath => (string)_process.GetPropertyValue("ExecutablePath");
         public uint ThreadCount => (uint)_process.GetPropertyValue("ThreadCount");
         public uint HandleCount => (uint)_process.GetPropertyValue("HandleCount");
-        public uint Priority => (uint)_process.GetPropertyValue("Priority");
+        public ulong WorkingSetSize => (ulong)_process.GetPropertyValue("WorkingSetSize");
+        public ProcessPriorityClass Priority => ConvertPriority((uint)_process.GetPropertyValue("Priority"));
         public DateTime CreationDate => ManagementDateTimeConverter.ToDateTime((string)_process.GetPropertyValue("CreationDate"));
 
         #endregion
 
         #region Methods
 
-        public void Kill() { /* not implemented */ }
-
-        internal void SetPriority(System.Diagnostics.ProcessPriorityClass priorityClass)
+        public void Kill()
         {
-            throw new NotImplementedException();
+            _process.InvokeMethod("Terminate", null);
         }
 
+        public void SetPriority(ProcessPriorityClass priorityClass)
+        {
+            _process.InvokeMethod("SetPriority", new object[] { priorityClass });
+        }
 
+        public IEnumerable<ProcessInfo> GetChildProcesses()
+        {
+            var searcher = new ManagementObjectSearcher($"SELECT * FROM Win32_Process WHERE ParentProcessId={PID}");
+            return searcher.Get().Cast<ManagementObject>().Select(Create);
+        }
 
+        void IDisposable.Dispose()
+        {
+            _process.Dispose();
+        }
 
         #endregion
 
         #region static members
+
+        private static ProcessPriorityClass ConvertPriority(uint value)
+        {
+            switch (value)
+            {
+                case 0:  return 0;
+                case 4:  return ProcessPriorityClass.Idle;
+                case 6:  return ProcessPriorityClass.BelowNormal;
+                case 8:  return ProcessPriorityClass.Normal;
+                case 10: return ProcessPriorityClass.AboveNormal;
+                case 13: return ProcessPriorityClass.High;
+                case 24: return ProcessPriorityClass.RealTime;
+            }
+            return ProcessPriorityClass.Normal;
+        }
 
         private static ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Process");
 

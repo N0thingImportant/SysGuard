@@ -6,24 +6,25 @@ namespace ProcessMonitor.Model.Presentation
     {
         public ProcessInDetailsDisplay()
         {
-            Name = "NAME";
+            Name = "-";
             Pid = "-";
-            Memory = "MEMORY";
+            WorkingSet = "-";
             Priority = "-";
             ThreadsCount = "-";
             ModulesCount = "-";
-            Responding = "-";
+            ParentPid = "-";
         }
 
         public string Name { get; set; }
-        public string Path { get; set; }
-        public string Args { get; set; }
+        public string ExecutablePath { get; set; }
+        public string CommandLine { get; set; }
         public string Pid { get; set; }
-        public string Memory { get; set; }
+        public string WorkingSet { get; set; }
         public string Priority { get; set; }
         public string ThreadsCount { get; set; }
         public string ModulesCount { get; set; }
-        public string Responding { get; set; }
+        public string ParentPid { get; set; }
+        public string CreationDate { get; set; }
         public List<string> ThreadNames { get; set; }
         public List<string> ModuleNames { get; set; }
     }

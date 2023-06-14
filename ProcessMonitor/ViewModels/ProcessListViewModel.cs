@@ -93,11 +93,11 @@ namespace ProcessMonitor.ViewModels
 
             if (SelectedProcess != null)
             {
-                SelectedProcess = MapProcessForDisplay(ProcessFetcher.FetchByPid(SelectedProcess.Pid));
+                SelectedProcess = ProcessInListDisplay.Create(ProcessInfo.GetProcessById(SelectedProcess.Pid));
             }
 
-            List<ProcessInListDisplay> ProcessesForDisplay = ProcessFetcher.Fetch()
-                .Select(process => MapProcessForDisplay(process))
+            List<ProcessInListDisplay> ProcessesForDisplay = ProcessInfo.GetProcesses()
+                .Select(ProcessInListDisplay.Create)
                 .ToList();
 
             UpdateProcessListWithNewItems(ProcessesForDisplay);
@@ -134,7 +134,7 @@ namespace ProcessMonitor.ViewModels
 
         private bool IsProcessAlive(string pid)
         {
-            return ProcessFetcher.FetchByPid(pid) != null;
+            return ProcessInfo.GetProcessById(pid) != null;
         }
 
         private void TerminateProcess()
@@ -145,11 +145,6 @@ namespace ProcessMonitor.ViewModels
                 ProcessList.Remove(SelectedProcess);
                 ApplyFilters();
             }
-        }
-
-        private ProcessInListDisplay MapProcessForDisplay(ProcessInfo process)
-        {
-            return new ProcessInListDisplay { Name = process.Name, Pid = process.PID.ToString() };
         }
 
         private void RaiseProcessSelectedEvent(ProcessInListDisplay value)
