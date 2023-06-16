@@ -45,15 +45,15 @@ namespace ProcessMonitor.ViewModels
             return new ProcessInDetailsDisplay
             {
                 Name = process.Name,
-                WorkingSet = (process.WorkingSetSize / 1024.0 / 1024.0).ToString("#,0.0 Mb"),
-                Pid = process.PID.ToString(),
-                ParentPid = process.ParentPID.ToString(),
-                CreationDate = process.CreationDate.ToString(),
-                Priority = process.Priority.ToString(),
+                WorkingSet = (process.WorkingSetSize / 1024.0 / 1024.0),
+                Pid = process.PID,
+                ParentPid = process.ParentPID,
+                CreationDate = process.CreationDate,
+                Priority = process.Priority,
                 CommandLine = process.CommandLine,
                 ExecutablePath = process.ExecutablePath,
-                ThreadsCount = process.ThreadCount.ToString(),
-                ModulesCount = process.HandleCount.ToString(),
+                ThreadsCount = process.ThreadCount,
+                ModulesCount = process.HandleCount,
                 ChildNames = childNames,
                 ModuleNames = moduleNames,
             };

@@ -160,7 +160,7 @@
                 </ScrollViewer>
 
                 <Label  Content="Working set" Grid.Row="2" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.WorkingSet}"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding StringFormat={}{0:#,0.0} Mb, Path=DisplayedProcess.WorkingSet}"></TextBox>
 
                 <Label  Content="Priority" Grid.Row="3" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
                 <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource DetailsValueBox}" IsReadOnly="False"  Text="{Binding DisplayedProcess.Priority}"></TextBox>
