@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Windows.Controls;
 
 namespace ProcessMonitor.Views
 {
@@ -10,6 +12,15 @@ namespace ProcessMonitor.Views
         public ProcessDetails()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_SelectProcessPath(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var pName = (sender as TextBox).Text;
+            if (File.Exists(pName))
+            {
+                Process.Start("explorer", $"/select,\"{pName}\"");
+            }
         }
     }
 }

@@ -118,7 +118,7 @@
                 </Grid.RowDefinitions>
 
                 <Label  Content="Full path" Grid.Row="0" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.ExecutablePath}"></TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.ExecutablePath}" MouseDoubleClick="TextBox_SelectProcessPath"></TextBox>
 
                 <Label  Content="CommandLine" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailsValueLabel}"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.CommandLine}"></TextBox>
@@ -137,7 +137,7 @@
 
                 <ScrollViewer Background="#3d3d3d" Grid.Row="6" Grid.Column="0" BorderBrush="Gray" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="10">
                     <ListBox Background="#3d3d3d" BorderThickness="0" Grid.Row="1" Grid.Column="0"
-                         BorderBrush="Gray" ItemsSource="{Binding DisplayedProcess.ThreadNames}">
+                         BorderBrush="Gray" ItemsSource="{Binding DisplayedProcess.ChildNames}">
                         <ListBox.Template>
                             <ControlTemplate>
                                 <ItemsPresenter/>
@@ -151,7 +151,6 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-
                         <ListBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -171,6 +170,30 @@
 
                 <Label  Content="Modules" Grid.Row="5" Grid.Column="2" Style="{StaticResource DetailsValueLabel}"/>
                 <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource DetailsValueBox}" Text="{Binding DisplayedProcess.ModulesCount}"></TextBox>
+
+                <ScrollViewer Background="#3d3d3d" Grid.Row="6" Grid.Column="2" BorderBrush="Gray" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="10">
+                    <ListBox Background="#3d3d3d" BorderThickness="0" Grid.Row="1" Grid.Column="0"
+                         BorderBrush="Gray" ItemsSource="{Binding DisplayedProcess.ModuleNames}">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter/>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="5">
+                                    <Label Content="{Binding }" Foreground="GhostWhite">
+                                    </Label>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </ListBox.Resources>
+                    </ListBox>
+                </ScrollViewer>
 
             </Grid>
         </Border>

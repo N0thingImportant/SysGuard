@@ -25,7 +25,7 @@ namespace ProcessMonitor.Model.Presentation
         public string ModulesCount { get; set; }
         public string ParentPid { get; set; }
         public string CreationDate { get; set; }
-        public List<string> ThreadNames { get; set; }
+        public List<string> ChildNames { get; set; }
         public List<string> ModuleNames { get; set; }
     }
 }

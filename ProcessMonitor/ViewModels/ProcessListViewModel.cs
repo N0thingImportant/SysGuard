@@ -93,7 +93,7 @@ namespace ProcessMonitor.ViewModels
 
             if (SelectedProcess != null)
             {
-                SelectedProcess = ProcessInListDisplay.Create(ProcessInfo.GetProcessById(SelectedProcess.Pid));
+                SelectedProcess = ProcessInListDisplay.Create(ProcessInfo.GetProcessById(SelectedProcess.PID));
             }
 
             List<ProcessInListDisplay> ProcessesForDisplay = ProcessInfo.GetProcesses()
@@ -108,8 +108,7 @@ namespace ProcessMonitor.ViewModels
             FilteredProcessList.Clear();
             List<ProcessInListDisplay> MatchingProcesses =
                 ProcessList.Where(process =>
-                process.DisplayName.ToLower().Contains(FilterPhrase.ToLower()) ||
-                process.Pid.Contains(FilterPhrase))
+                process.DisplayName.ToLower().Contains(FilterPhrase.ToLower()))
                 .ToList();
             FilteredProcessList.AddRange(MatchingProcesses);
         }
@@ -126,7 +125,6 @@ namespace ProcessMonitor.ViewModels
                 this,
                 new Func<string, bool>(IsProcessAlive));
 
-
             Thread newProcessThread = new Thread(() => pri.Start(10000, newProcess.Id.ToString()));
             AppThreadManager.AddThread(newProcessThread);
             newProcessThread.Start();
@@ -141,7 +139,7 @@ namespace ProcessMonitor.ViewModels
         {
             if (SelectedProcess != null)
             {
-                ProcessManager.KillProcess(SelectedProcess.Pid);
+                ProcessManager.KillProcess(SelectedProcess.PID);
                 ProcessList.Remove(SelectedProcess);
                 ApplyFilters();
             }
@@ -151,7 +149,7 @@ namespace ProcessMonitor.ViewModels
         {
             if (value != null)
             {
-                _eventAggregator.GetEvent<ProcessPidSelectedEvent>().Publish(value.Pid);
+                _eventAggregator.GetEvent<ProcessPidSelectedEvent>().Publish(value.PID);
             }
         }
 

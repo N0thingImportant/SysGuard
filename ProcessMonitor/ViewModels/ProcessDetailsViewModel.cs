@@ -40,7 +40,7 @@ namespace ProcessMonitor.ViewModels
         private ProcessInDetailsDisplay MapProcessToDisplay(ProcessInfo process)
         {
             List<string> childNames = new List<string>(process.GetChildProcesses().Select(ProcessInListDisplay.Create).Select(p =>p.ToString()));
-            List<string> moduleNames = new List<string>();
+            List<string> moduleNames = process.GetProcessModules();
 
             return new ProcessInDetailsDisplay
             {
@@ -54,7 +54,7 @@ namespace ProcessMonitor.ViewModels
                 ExecutablePath = process.ExecutablePath,
                 ThreadsCount = process.ThreadCount.ToString(),
                 ModulesCount = process.HandleCount.ToString(),
-                ThreadNames = childNames,
+                ChildNames = childNames,
                 ModuleNames = moduleNames,
             };
         }

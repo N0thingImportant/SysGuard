@@ -52,6 +52,24 @@ namespace ProcessMonitor.ProcessThings
             return searcher.Get().Cast<ManagementObject>().Select(Create);
         }
 
+        public List<string> GetProcessModules()
+        {
+            // It's not a good practic but work
+            try
+            {
+                var process = Process.GetProcessById((int)PID);
+                var modules = process.Modules;
+                var result = new List<string>(modules.Count);
+                for (int i = 0; i < modules.Count; ++i)
+                    result.Add(modules[i].ModuleName);
+                return result;
+            }
+            catch
+            {
+                return new List<string> { };
+            }
+        }
+
         void IDisposable.Dispose()
         {
             _process.Dispose();
@@ -65,10 +83,10 @@ namespace ProcessMonitor.ProcessThings
         {
             switch (value)
             {
-                case 0:  return 0;
-                case 4:  return ProcessPriorityClass.Idle;
-                case 6:  return ProcessPriorityClass.BelowNormal;
-                case 8:  return ProcessPriorityClass.Normal;
+                case 0: return 0;
+                case 4: return ProcessPriorityClass.Idle;
+                case 6: return ProcessPriorityClass.BelowNormal;
+                case 8: return ProcessPriorityClass.Normal;
                 case 10: return ProcessPriorityClass.AboveNormal;
                 case 13: return ProcessPriorityClass.High;
                 case 24: return ProcessPriorityClass.RealTime;
@@ -93,6 +111,11 @@ namespace ProcessMonitor.ProcessThings
         }
 
         internal static ProcessInfo GetProcessById(string pid)
+        { // TODO!
+            return GetProcesses(p => pid.Equals(p["Handle"])).FirstOrDefault();
+        }
+
+        internal static ProcessInfo GetProcessById(uint pid)
         {
             return GetProcesses(p => pid.Equals(p["Handle"])).FirstOrDefault();
         }

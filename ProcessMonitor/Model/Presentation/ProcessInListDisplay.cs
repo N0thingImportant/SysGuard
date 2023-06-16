@@ -4,20 +4,20 @@ namespace ProcessMonitor.Model
 {
     public class ProcessInListDisplay
     {
-        public string Pid { get; set; }
+        public string PID { get; set; }
         public string Name { get; set; }
 
         public string DisplayName
         {
             get
             {
-                return $"[{Pid,6}]: {Name}";
+                return $"[{PID,6}]: {Name}";
             }
         }
 
         public static ProcessInListDisplay Create(ProcessInfo process)
         {
-            return new ProcessInListDisplay { Name = process.Name, Pid = process.PID.ToString() };
+            return new ProcessInListDisplay { Name = process.Name, PID = process.PID.ToString() };
         }
 
         public override string ToString() => DisplayName;
@@ -26,9 +26,14 @@ namespace ProcessMonitor.Model
         {
             if (obj is ProcessInListDisplay process)
             {
-                return process.Pid == Pid;
+                return process.PID == PID;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return PID.GetHashCode();
         }
     }
 }
