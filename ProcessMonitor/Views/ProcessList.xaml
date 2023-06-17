@@ -9,7 +9,6 @@
              mc:Ignorable="d"  >
     <UserControl.Resources>
 
-
         <Style TargetType="Thumb">
             <Setter Property="Template">
                 <Setter.Value>
@@ -142,7 +141,9 @@
                     </Image.Style>
                 </Image>
                 <Border Margin="5"/>
-                <Border Margin="5"></Border>
+                <Border Margin="2">
+                    <Label Foreground="GhostWhite" FontSize="14" Padding="1" Content="  Search: "/>
+                </Border>
                 <Border CornerRadius="5">
                     <TextBox Width="120" VerticalContentAlignment="Center" Background="#424242" Foreground="GhostWhite"
                          Text="{Binding FilterPhrase, UpdateSourceTrigger=PropertyChanged}">
@@ -155,7 +156,6 @@
                 </Border>
 
                 <Border Margin="5"/>
-                <ProgressBar Width="100" Background="#424242" Value="{Binding PercentOfProcessFinished}"></ProgressBar>
             </StackPanel>
 
 
