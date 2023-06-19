@@ -8,6 +8,7 @@ public class SysGuardDbContext : DbContext
     public DbSet<SusArg> SusArgs { get; set; }
     public DbSet<ProcInfo> ProcInfos { get; set; }
     public DbSet<Log> Logs { get; set; }
+    public DbSet<Reserve> Reserved { get; set; }
 
     private static SQLiteConnection CreateConnection(string path)
     {
@@ -28,5 +29,6 @@ public class SysGuardDbContext : DbContext
         modelBuilder.Entity<SusArg>().ToTable(nameof(SusArgs));
         modelBuilder.Entity<ProcInfo>().ToTable(nameof(ProcInfos));
         modelBuilder.Entity<Log>().ToTable(nameof(Logs));
+        modelBuilder.Entity<Reserve>().ToTable(nameof(Reserved));
     }
 }
