@@ -102,6 +102,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\DbSetExtensions.cs" />
     <Compile Include="DB\DTO.cs" />
     <Compile Include="DB\SysGuardDbContext.cs" />
     <Compile Include="Model\Events\ProcessPidSelectedEvent.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Model\Presentation\ProcessInListDisplay.cs" />
     <Compile Include="Model\Presentation\ProcessPriorityInComboBox.cs" />
     <Compile Include="Model\Presentation\ResourcesUsage.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="ProcessThings\ProcessInfo.cs" />
     <Compile Include="ProcessThings\ProcessManager.cs" />
     <Compile Include="ViewModels\ProcessControlViewModel.cs" />
