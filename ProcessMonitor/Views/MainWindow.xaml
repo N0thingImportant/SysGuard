@@ -29,8 +29,11 @@
         </Grid.RowDefinitions>
         
         <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Label Foreground="GhostWhite" FontFamily="Roboto" HorizontalAlignment="Left">SysGuard</Label>
-            <Label Width="1000" RenderTransformOrigin="0.502,0.556"/>
+            <Label Foreground="GhostWhite" FontFamily="Roboto" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left">SysGuard</Label>
+            <Label Foreground="GhostWhite" FontFamily="Roboto" Content="         DataBase:"/>
+            <Button Background="#525252" Margin="2" Foreground="GhostWhite" FontFamily="Roboto" HorizontalAlignment="Left" Click="Button_Click" Tag="SysFiles" Content="System files"/>
+            <Button Background="#525252" Margin="2" Foreground="GhostWhite" FontFamily="Roboto" HorizontalAlignment="Left" Click="Button_Click" Tag="SusArgs" Content="Suspicious arguments"/>
+            <Button Background="#525252" Margin="2" Foreground="GhostWhite" FontFamily="Roboto" HorizontalAlignment="Left" Click="Button_Click" Tag="Logs" Content="Process actions logs"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="3" >
@@ -65,20 +68,12 @@
             <Border Margin="5"/>
         </StackPanel>
 
-        <views:ProcessList Grid.Row="1" Grid.Column="0" Margin="20,10,10,20" Grid.RowSpan="2">
-            
-        </views:ProcessList>
+        <views:ProcessList Grid.Row="1" Grid.Column="0" Margin="20,10,10,20" Grid.RowSpan="2"/>
 
-        <views:ProcessDetails Grid.Row="1" Grid.Column="1" Margin="10,10,20,20" Grid.ColumnSpan="2">
-            
-        </views:ProcessDetails>
-       
-        <views:SystemPerformance Grid.Row="2" Grid.Column="1" Margin="10 10 20 20" Grid.ColumnSpan="2">
-            
-        </views:SystemPerformance>
-        
-        
-        
+        <views:ProcessDetails Grid.Row="1" Grid.Column="1" Margin="10,10,20,20" Grid.ColumnSpan="2"/>
+
+        <views:SystemPerformance Grid.Row="2" Grid.Column="1" Margin="10 10 20 20" Grid.ColumnSpan="2"/>
+
     </Grid>
 
 </Window>

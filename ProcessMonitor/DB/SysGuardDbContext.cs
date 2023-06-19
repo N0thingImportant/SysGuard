@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.SQLite;
 using System.Data.SQLite.EF6;
+using System.IO;
 
 namespace ProcessMonitor.DB
 {
@@ -23,7 +25,18 @@ namespace ProcessMonitor.DB
             return new SQLiteConnection(builder.ToString());
         }
 
-        public SysGuardDbContext(string path) : base(CreateConnection(path), false) { }
+        public SysGuardDbContext(string path) : base(CreateConnection(path), false)
+        {
+            if (!File.Exists(path))
+            {
+                Notification.Send("DEBUG", $"Database file '{path}' not found");
+                var obj = Properties.Resources.ResourceManager.GetObject(path);
+                if (obj == null)
+                    throw new InvalidOperationException($"Cannot find file or resource '{path}'.");
+                Notification.Send("DEBUG", $"Database file '{path}' restored from resources");
+                File.WriteAllBytes(path, obj as byte[]);
+            }
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
