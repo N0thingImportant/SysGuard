@@ -13,7 +13,7 @@ namespace ProcessMonitor.DB
         {
             if (obj == null)
             {
-                throw new ArgumentNullException(nameof(obj));
+                return null;
             }
 
             var expr = MakeFindExpr(obj);

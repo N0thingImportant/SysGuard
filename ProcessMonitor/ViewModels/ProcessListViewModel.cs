@@ -96,7 +96,9 @@ namespace ProcessMonitor.ViewModels
                 SelectedProcess = ProcessInListDisplay.Create(ProcessInfo.GetProcessById(SelectedProcess.PID));
             }
 
-            List<ProcessInListDisplay> ProcessesForDisplay = ProcessInfo.GetProcesses()
+            ProcessInfo processInfo = null;
+            var ps = ProcessInfo.GetProcesses();
+            List<ProcessInListDisplay> ProcessesForDisplay = ps
                 .Select(ProcessInListDisplay.Create)
                 .ToList();
 

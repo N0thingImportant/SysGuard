@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
+using System.Threading;
 
 namespace ProcessMonitor.ProcessThings
 {
@@ -79,6 +80,43 @@ namespace ProcessMonitor.ProcessThings
 
         #region static members
 
+        private const int maxBuffer = 32;
+        private const int timer = 666;
+
+        private static Thread updater;
+
+        private static List<Dictionary<uint, ProcessInfo>> buffer = new List<Dictionary<uint, ProcessInfo>>(maxBuffer);
+
+        static ProcessInfo()
+        {
+            AddProcessesDic();
+            updater = new Thread(UpdateProcessBuffer);
+            updater.Start();
+        }
+
+        private static void UpdateProcessBuffer()
+        {
+            do
+            {
+                if (buffer.Count == maxBuffer)
+                    buffer.RemoveAt(0);
+                AddProcessesDic();
+                Thread.Sleep(timer);
+            }
+            while (true);
+        }
+
+        private static void AddProcessesDic()
+        {
+            var dic = new Dictionary<uint, ProcessInfo>();
+            foreach (var proc in GetProcessesInternal())
+            {
+                dic[proc.PID] = proc;
+            }
+            lock (buffer)
+                buffer.Add(dic);
+        }
+
         private static ProcessPriorityClass ConvertPriority(uint value)
         {
             switch (value)
@@ -98,26 +136,28 @@ namespace ProcessMonitor.ProcessThings
 
         private static ProcessInfo Create(ManagementObject obj) => new ProcessInfo(obj);
 
-        private static bool AllProcesses(ManagementObject obj) => true;
-
-        internal static IEnumerable<ProcessInfo> GetProcesses(Func<ManagementObject, bool> predicate)
-        {
-            return searcher.Get().Cast<ManagementObject>().Where(predicate).Select(Create);
-        }
-
         internal static IEnumerable<ProcessInfo> GetProcesses()
         {
-            return GetProcesses(AllProcesses);
+            lock (buffer)
+                return buffer[buffer.Count - 1].Values.ToArray();
+        }
+
+        internal static IEnumerable<ProcessInfo> GetProcessesInternal()
+        {
+            return searcher.Get().Cast<ManagementObject>().Select(Create);
         }
 
         internal static ProcessInfo GetProcessById(string pid)
-        { // TODO!
-            return GetProcesses(p => pid.Equals(p["Handle"])).FirstOrDefault();
+        {
+            return GetProcessById(uint.Parse(pid));
         }
 
         internal static ProcessInfo GetProcessById(uint pid)
         {
-            return GetProcesses(p => pid.Equals(p["Handle"])).FirstOrDefault();
+            var list = buffer.FirstOrDefault(l => l.ContainsKey(pid));
+            if (list == null)
+                return null;
+            return list[pid];
         }
 
         #endregion

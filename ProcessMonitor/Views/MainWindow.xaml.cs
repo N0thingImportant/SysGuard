@@ -8,6 +8,7 @@ namespace ProcessMonitor.Views
         {
             InitializeComponent();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            Monitor.Start();
         }
 
         private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -17,7 +18,6 @@ namespace ProcessMonitor.Views
 
         private void Label_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            new DB.SysGuardDbContext("SysGuard.db");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

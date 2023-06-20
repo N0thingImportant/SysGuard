@@ -117,6 +117,7 @@
     <Compile Include="Model\Presentation\ProcessInListDisplay.cs" />
     <Compile Include="Model\Presentation\ProcessPriorityInComboBox.cs" />
     <Compile Include="Model\Presentation\ResourcesUsage.cs" />
+    <Compile Include="Monitor.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="ProcessThings\ProcessInfo.cs" />
     <Compile Include="ProcessThings\ProcessManager.cs" />
@@ -124,6 +125,9 @@
     <Compile Include="ViewModels\ProcessDetailsViewModel.cs" />
     <Compile Include="ViewModels\ProcessListViewModel.cs" />
     <Compile Include="ViewModels\SystemPerformanceViewModel.cs" />
+    <Compile Include="Views\DB\SysFilesWindow.xaml.cs">
+      <DependentUpon>SysFilesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProcessControl.xaml.cs">
       <DependentUpon>ProcessControl.xaml</DependentUpon>
     </Compile>
@@ -139,6 +143,10 @@
     <Compile Include="Views\SystemPerformance.xaml.cs">
       <DependentUpon>SystemPerformance.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DB\SysFilesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

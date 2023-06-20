@@ -38,13 +38,15 @@ namespace ProcessMonitor.DB
             }
         }
 
+        public SysGuardDbContext() : this ("SysGuard.db") { }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SysFile>().ToTable(nameof(SysFiles));
             modelBuilder.Entity<SusArg>().ToTable(nameof(SusArgs));
             modelBuilder.Entity<ProcInfo>().ToTable(nameof(ProcInfos));
             modelBuilder.Entity<Log>().ToTable(nameof(Logs));
-            modelBuilder.Entity<Reserve>().ToTable(nameof(Reserved));
+            modelBuilder.Entity<Reserve>().ToTable(nameof(Reserved)).HasKey(r => r.Table);
         }
     }
 }
