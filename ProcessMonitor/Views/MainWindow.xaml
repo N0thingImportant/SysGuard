@@ -15,7 +15,31 @@
         Title="SysGuard"
         FontFamily="Consolas" FontSize="14"
         >
-    
+
+    <Window.Resources>
+        <Style TargetType="Button" >
+            <Setter Property="Background" Value="#525252"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="FontFamily" Value="Roboto"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Padding="3" Background="{TemplateBinding Background}" BorderBrush="DarkGray" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#424242"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -23,17 +47,17 @@
             <ColumnDefinition Width="60"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition/>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+        <StackPanel Margin="2" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Label Foreground="GhostWhite" FontFamily="Roboto" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left">SysGuard</Label>
             <Label Foreground="GhostWhite" FontFamily="Roboto" Content="         DataBase:"/>
-            <Button Background="#525252" Margin="2" Foreground="GhostWhite" FontFamily="Roboto" HorizontalAlignment="Left" Click="Button_Click" Tag="SysFiles" Content="System files"/>
-            <Button Background="#525252" Margin="2" Foreground="GhostWhite" FontFamily="Roboto" HorizontalAlignment="Left" Click="Button_Click" Tag="SusArgs" Content="Suspicious arguments"/>
-            <Button Background="#525252" Margin="2" Foreground="GhostWhite" FontFamily="Roboto" HorizontalAlignment="Left" Click="Button_Click" Tag="Logs" Content="Process actions logs"/>
+            <Button Click="Button_Click" Tag="SysFiles" Content="System files"/>
+            <Button Click="Button_Click" Tag="SusArgs" Content="Suspicious arguments"/>
+            <Button Click="Button_Click" Tag="Logs" Content="Process actions logs"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="3" >

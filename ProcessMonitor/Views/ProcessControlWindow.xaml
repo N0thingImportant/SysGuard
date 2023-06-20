@@ -12,6 +12,7 @@
         BorderBrush="#454444"
         BorderThickness="2"
         >
+
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2"></ColumnDefinition>
@@ -64,10 +65,7 @@
             <Border Margin="5"/>
         </StackPanel>
 
-        <views:ProcessControl Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="10,0,20,20">
-            
-        </views:ProcessControl>
-
+        <views:ProcessControl Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="10,0,20,20"/>
 
     </Grid>
 </Window>
